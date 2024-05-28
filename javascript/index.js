@@ -47,5 +47,12 @@ function updateMontrealTime() {
     "h:mm:ss"
   )} <small>${montrealTime.format("A")}</small>`;
 }
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
+  console.log(cityTimeZone);
+}
 updateMontrealTime();
 setInterval(updateMontrealTime, 1000);
+
+let citiesSelectElement = document.querySelector("#city");
+citiesSelectElement.addEventListener("change", updateCity);
