@@ -37,22 +37,33 @@ function updateTokyoTime() {
 updateTokyoTime();
 setInterval(updateTokyoTime, 1000);
 
-function updateMontrealTime() {
-  let montrealElement = document.querySelector("#montreal");
-  let montrealDateElement = montrealElement.querySelector(".date");
-  let montrealTimeElement = montrealElement.querySelector(".time");
-  let montrealTime = moment().tz("America/Toronto");
-  montrealDateElement.innerHTML = montrealTime.format("MMMM Do YYYY");
-  montrealTimeElement.innerHTML = `${montrealTime.format(
+function updateMaldivesTime() {
+  let maldivesElement = document.querySelector("#maldives");
+  let maldivesDateElement = maldivesElement.querySelector(".date");
+  let maldivesTimeElement = maldivesElement.querySelector(".time");
+  let maldivesTime = moment().tz("Indian/Maldives");
+  maldivesDateElement.innerHTML = maldivesTime.format("MMMM Do YYYY");
+  maldivesTimeElement.innerHTML = `${maldivesTime.format(
     "h:mm:ss"
-  )} <small>${montrealTime.format("A")}</small>`;
+  )} <small>${maldivesTime.format("A")}</small>`;
 }
 function updateCity(event) {
   let cityTimeZone = event.target.value;
-  console.log(cityTimeZone);
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimeZone);
+  let citiesElement = document.querySelector("#cities");
+  citiesElement.innerHTML = `<div class="city">
+          <div>
+            <h2>${cityName}</h2>
+            <div class="date"> ${cityTime.format("MMMM Do YYYY")}</div>
+          </div>
+          <div class="time">${cityTime.format(
+            "h:mm:ss"
+          )} <small>${cityTime.format("A")}</small></div>
+        </div>`;
 }
-updateMontrealTime();
-setInterval(updateMontrealTime, 1000);
+updateMaldivesTime();
+setInterval(updateMaldivesTime, 1000);
 
 let citiesSelectElement = document.querySelector("#city");
 citiesSelectElement.addEventListener("change", updateCity);
